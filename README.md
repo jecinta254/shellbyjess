@@ -2,7 +2,7 @@
 
 0x16. C - Simple Shell
 C
-Group project
+Group project by Jecinta and Joseph
 Syscall
  By: Julien Barbier
  Weight: 10
