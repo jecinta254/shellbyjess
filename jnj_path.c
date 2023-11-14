@@ -1,8 +1,19 @@
 #include "shell.h"
 
+/**
+ * command_exists - it checks if a command exists.
+ * @command: the command to check.
+ * Return: 1 if the command exists, 0 otherwise.
+ */
+
 int command_exists(const char *command) {
     return access(command, X_OK) == 0;
 }
+
+/**
+ * jnj_path - it prints the paths where a sample command exists.
+ * Return: Always 0.
+ */
 
 int jnj_path()
 {
