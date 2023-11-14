@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * jnj_execute - all it does is execute a command.
+ * @watho: The command to execute.
+ */
+
 void jnj_execute(const char *watho)
 {
 	char **argument_s;
