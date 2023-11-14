@@ -2,6 +2,11 @@
 
 char watho[1024];
 
+/**
+ * main - the entry point of the shell program.
+ * Return: Always 0.
+ */
+
 int main(void){
         while (true)
         {
