@@ -1,0 +1,16 @@
+#!/bin/bash
+# This is a simple shell script following Betty style guidelines
+
+function greeting_myuser {
+  # This function greets the user
+  echo "Hello, my user!"
+}
+
+function getting_current_dates {
+  # This function gets the current date
+  date
+}
+
+# Main execution starts here
+greeting_myuser
+getting_current_dates
