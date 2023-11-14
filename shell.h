@@ -10,11 +10,16 @@
 #include <fcntl.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#define BUFFER_SIZE 1024:wq
 
+int jnj_path();
 void jnj_prompt(void);
 void jnj_print(const char *jnjstring);
 void jnj_readcmd(char *watho, size_t size);
 void jnj_execute(const char *watho);
+int command_exists(const char *command);
+void run_env(void);
+int our_env(); 
 
 
 #endif
