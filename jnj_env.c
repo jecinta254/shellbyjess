@@ -1,7 +1,9 @@
 #include "shell.h"
 
 extern char **environ;
-
+/**
+ * run_env - it prints the environment variables.
+ */
 void run_env(void) {
     int i;
 
@@ -9,6 +11,12 @@ void run_env(void) {
         printf("%s\n", environ[i]);
     }
 }
+
+/**
+ * our_env - its the custom shell environment.
+ *
+ * Returns: 0 on success.
+ */
 
 int our_env() {
     char *buffer = NULL;
