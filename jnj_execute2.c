@@ -27,7 +27,6 @@ void jnj_execute2(const char *watho)
 
     argument_s[arg_count] = NULL;
     mtoto_pid = fork();
-
     if (mtoto_pid == 0)
     {
         if (execvp(argument_s[0], argument_s) == -1)

@@ -11,8 +11,6 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
-#include "jnj_getline.h"
-
 #define BUFFER_SIZE 1024
 
 void jnj_prompt(void);
@@ -27,8 +25,5 @@ void jnj_execute2(const char *watho);
 void jnj_envout(void);
 int watho_exists(const char *watho);
 int jnj_path(void);
-void cd_directory(const char *path);
-int command_exists_path(const char *command);
-
 
 #endif
