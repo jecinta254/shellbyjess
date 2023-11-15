@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
-* main - the entry point of the shell program.
+* exec_shell - the entry point of the shell program.
 * Return: Always 0.
 */
 
-int main(void)
+void execute_shell(void)
 {
 
 char watho[BUFFER_SIZE];
@@ -19,7 +19,7 @@ jnj_readcmd(watho, sizeof(watho));
 
 if (strcmp(watho, "exit\n") == 0)
 {
-        break;
+break;
 }
 
 else if (strcmp(watho, "env\n") == 0)
@@ -59,7 +59,4 @@ jnj_execute(watho);
 }
 }
 }
-
-return (0);
-
 }

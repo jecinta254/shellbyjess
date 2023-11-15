@@ -25,5 +25,6 @@ void jnj_execute2(const char *watho);
 void jnj_envout(void);
 int watho_exists(const char *watho);
 int jnj_path(void);
+void execute_shell(void);
 
 #endif
