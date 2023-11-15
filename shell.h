@@ -23,5 +23,6 @@ void run_env(void);
 int our_env(void);
 extern char **environ;
 void jnj_execute2(const char *watho);
+void jnj_envout(void);
 
 #endif

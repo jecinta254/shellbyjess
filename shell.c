@@ -16,8 +16,21 @@ while (true)
 {
 jnj_prompt();
 jnj_readcmd(watho, sizeof(watho));
-jnj_execute2(watho);
 
+if (strcmp(watho, "exit\n") == 0)
+{
+	jnj_print("Bye Bye my shell,Jess loves you and takecare\n");
+	break;
+}
+
+else if (strcmp(watho, "env\n") == 0)
+{
+jnj_envout();
+}
+else
+{
+jnj_execute2(watho);
+}
 if (feof(stdin))
 {
 jnj_print("\n");
