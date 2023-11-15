@@ -1,49 +1,30 @@
 #include "shell.h"
 
 /**
-* command_exists - it checks if a command exists.
-* @command: the command to check.
-* Return: 1 if the command exists, 0 otherwise.
-*/
+ * command_exists_path - fuction that defines the path
+ *
+ */
 
-int command_exists(const char *command)
+int command_exists_path(const char *command)
 {
-return (access(command, X_OK) == 0);
-}
+    char *paths = getenv("PATH");
+    char *path_cpy = strdup(paths);
+    char *token = strtok(path_cpy, ":");
+    
+    while (token != NULL)
+    {
+        char full_path[BUFFER_SIZE];
+        snprintf(full_path, sizeof(full_path), "%s/%s", token, command);
 
-/**
-* jnj_path - it prints the paths where a sample command exists.
-* Return: Always 0.
-*/
+        if (access(full_path, X_OK) == 0)
+        {
+            free(path_cpy);
+            return (1);
+        }
 
-int jnj_path(void)
-{
-char *path_s = getenv("PATH");
+        token = strtok(NULL, ":");
+    }
 
-if (path_s != NULL)
-{
-char *path_cp = strdup(path_s);
-char *token = strtok(path_cp, ":");
-
-while (token != NULL)
-{
-char command_paths[256];
-snprintf(command_paths, sizeof(command_paths), "%s/%s", token, "ls");
-
-if (command_exists(command_paths))
-{
-printf("Command found: %s\n", command_paths);
-}
-else
-{
-printf("Command not found: %s\n", command_paths);
-}
-
-token = strtok(NULL, ":");
-}
-
-free(path_cp);
-}
-
-return (0);
+    free(path_cpy);
+    return 0;
 }

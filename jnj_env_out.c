@@ -7,11 +7,11 @@
 */
 void jnj_envout(void)
 {
-int x = 0;
-while (environ[x] != NULL)
+int i = 0;
+while (environ[i] != NULL)
 
 {
-printf("%s\n", environ[x]);
-x++;
+printf("%s\n", environ[i]);
+i++;
 }
 }

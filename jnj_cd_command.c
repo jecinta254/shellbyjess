@@ -1,16 +1,17 @@
 #include "shell.h"
 
 /**
- * jnj_execute2 - executes a command with arguments.
- * @watho: The command to execute.
+ *jnj_execute3 - function that changes directory
+ *
  */
-void jnj_execute2(const char *watho)
+
+void jnj_execute3(const char *watho)
 {
     char **argument_s;
     char *token;
     int status;
-    int arg_count = 0;
-    char *delm = " \t\n";
+    int arg_ument_count = 0;
+    char *delm = " ";
     pid_t mtoto_pid;
 
     token = strtok((char *)watho, delm);
@@ -18,19 +19,18 @@ void jnj_execute2(const char *watho)
 
     while (token)
     {
-        argument_s[arg_count] = strdup(token);
+        argument_s[arg_ument_count] = strdup(token);
         token = strtok(NULL, delm);
-        arg_count++;
+        arg_ument_count++;
 
-        argument_s = realloc(argument_s, sizeof(char *) * (arg_count + 1));
+        argument_s = realloc(argument_s, sizeof(char *) * (arg_ument_count + 1));
     }
 
-    argument_s[arg_count] = NULL;
+    argument_s[arg_ument_count] = NULL;
     mtoto_pid = fork();
-
     if (mtoto_pid == 0)
     {
-        if (execvp(argument_s[0], argument_s) == -1)
+        if (execve(argument_s[0], argument_s, environ) == -1)
         {
             perror("Error");
             exit(EXIT_FAILURE);
@@ -41,5 +41,6 @@ void jnj_execute2(const char *watho)
         wait(&status);
     }
 
+    arg_ument_count = 0;
     free(argument_s);
 }
