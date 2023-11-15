@@ -22,6 +22,6 @@ int command_exists(const char *command);
 void run_env(void);
 int our_env(void);
 extern char **environ;
-
+void jnj_execute2(const char *watho);
 
 #endif
