@@ -5,7 +5,7 @@
 * Return: Always 0.
 */
 
-void execute_shell(void)
+int main(void)
 {
 
 char watho[BUFFER_SIZE];
@@ -59,4 +59,5 @@ jnj_execute(watho);
 }
 }
 }
+return (0);
 }
