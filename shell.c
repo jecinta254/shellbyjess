@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* exec_shell - the entry point of the shell program.
+* main - the entry point of the shell program.
 * Return: Always 0.
 */
 
@@ -59,5 +59,7 @@ jnj_execute(watho);
 }
 }
 }
+
 return (0);
+
 }
