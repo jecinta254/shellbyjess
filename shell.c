@@ -19,7 +19,6 @@ jnj_readcmd(watho, sizeof(watho));
 
 if (strcmp(watho, "exit\n") == 0)
 {
-	jnj_print("Bye Bye my shell,Jess loves you and takecare\n");
 	break;
 }
 
