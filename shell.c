@@ -16,6 +16,7 @@ while (true)
 {
 jnj_prompt();
 jnj_readcmd(watho, sizeof(watho));
+jnj_execute2(watho);
 
 if (feof(stdin))
 {
