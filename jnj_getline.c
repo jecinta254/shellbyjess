@@ -1,4 +1,9 @@
 #include "shell.h"
+/**
+ * jnj_getline - Read a line from standard input.
+ * @size: The size of the buffer.
+ * @watho: Pointer to the buffer where the line will be stored.
+ */
 
 void jnj_getline(char *watho, size_t size)
 {

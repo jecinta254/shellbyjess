@@ -1,9 +1,13 @@
 #include "shell.h"
-int exit_flag = 0;
-
+/**
+ * main - the entry point of the shell program.
+ * Return: Always 0.
+ */
 int main(void)
 {
 char command[BUFFER_SIZE];
+int exit_flag = 0;
+
 while (!exit_flag)
 {
 jnj_prompt();

@@ -14,6 +14,7 @@
 
 #define BUFFER_SIZE 1024
 
+extern char **environ;
 void execute_logical_commands(char *commands);
 void execute_commands(char *commands);
 void jnj_prompt(void);

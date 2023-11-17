@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ * trim_spaces - Trim leading and trailing spaces from a string.
+ * @str: The input string
+ * Returns: str
+ */
 char *trim_spaces(char *str)
 {
 char *end = str + strlen(str) - 1;
@@ -18,10 +22,14 @@ str++;
 
 return (str);
 }
-
+/**
+ * execute_logical_commands - Execute logical commands
+ * @commands: The array of commands to execute.
+ * @count: The number of commands in the array.
+ * Returns: The exit status of the last executed command.
+ */
 void execute_logical_commands(char *commands)
-{
-char *token_and = strtok(commands, "&&");
+{ char *token_and = strtok(commands, "&&");
 
 while (token_and != NULL)
 {
@@ -39,10 +47,14 @@ token_or = strtok(NULL, "||");
 token_and = strtok(NULL, "&&");
 }
 }
-
+/**
+ * execute_commands - Execute a series of commands.
+ * @commands: The array of commands to execute.
+ * @count: The number of commands in the array.
+ * Returns: The exit status of the last executed command.
+ */
 void execute_commands(char *commands)
-{
-char *token = strtok(commands, ";");
+{ char *token = strtok(commands, ";");
 while (token != NULL)
 {
 if (token[0] != '\0' && token[0] != '\n')
