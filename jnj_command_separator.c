@@ -26,11 +26,11 @@ return (str);
  * execute_logical_commands - Execute logical commands
  * @commands: The array of commands to execute.
  * @count: The number of commands in the array.
- * Returns: The exit status of the last executed command.
+ * Returns: The result of logical commands
  */
 void execute_logical_commands(char *commands)
-{ char *token_and = strtok(commands, "&&");
-
+{
+char *token_and = strtok(commands, "&&");
 while (token_and != NULL)
 {
 char *token_or = strtok(token_and, "||");
@@ -54,7 +54,9 @@ token_and = strtok(NULL, "&&");
  * Returns: The exit status of the last executed command.
  */
 void execute_commands(char *commands)
-{ char *token = strtok(commands, ";");
+{ 
+
+char *token = strtok(commands, ";");
 while (token != NULL)
 {
 if (token[0] != '\0' && token[0] != '\n')
