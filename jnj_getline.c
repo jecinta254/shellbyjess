@@ -1,11 +1,6 @@
 #include "shell.h"
 
-/**
- * jnj_readcmd - it reads a command from stdin.
- * @watho: the buffer to store the command.
- * @size: the size of the buffer.
- */
-void jnj_readcmd(char *watho, size_t size)
+void jnj_getline(char *watho, size_t size)
 {
     if (fgets(watho, size, stdin) == NULL)
     {
@@ -16,7 +11,7 @@ void jnj_readcmd(char *watho, size_t size)
         }
         else
         {
-            jnj_print("look for the error, there is one.");
+            perror("Error reading command");
             exit(EXIT_FAILURE);
         }
     }
