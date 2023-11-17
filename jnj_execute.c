@@ -42,16 +42,6 @@ exit(EXIT_SUCCESS);
 else
 {
 waitpid(mtoto_pid, &status, 0);
-if (WIFEXITED(status))
-{
-int exit_status = WEXITSTATUS(status);
-printf("Command '%s' exited with status %d\n", watho, exit_status);
-}
-else if (WIFSIGNALED(status))
-{
-int signal_number = WTERMSIG(status);
-printf("Command '%s' terminated by signal %d\n", watho, signal_number);
-}
 }
 
 free(argument_s);
