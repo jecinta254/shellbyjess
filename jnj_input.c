@@ -23,3 +23,5 @@ void jnj_readcmd(char *watho, size_t size)
 
     watho[strcspn(watho, "\n")] = '\0';
 }
+
+
