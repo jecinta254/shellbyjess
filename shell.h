@@ -24,5 +24,7 @@ void jnj_execute(const char *watho);
 void jnj_getline(char *watho, size_t size);
 void run_env(void);
 void execute_alias(const char *alias_args);
+char *trim_spaces(char *str);
 
 #endif
+

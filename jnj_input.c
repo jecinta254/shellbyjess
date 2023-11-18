@@ -23,5 +23,3 @@ exit(EXIT_FAILURE);
 
 watho[strcspn(watho, "\n")] = '\0';
 }
-
-
