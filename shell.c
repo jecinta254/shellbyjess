@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
-* main - the entry point of the shell program.
-* Return: Always 0.
-*/
+ * main - the entry point of the shell program.
+ * Return: Always 0.
+ */
 int main(void)
 {
 char command[BUFFER_SIZE];
@@ -16,7 +16,10 @@ if (strncmp(command, "exit", 4) == 0)
 {
 int status = atoi(command + 5);
 exit_flag = 1;
-exit(status); }
+exit(status);
+}
+else if (strncmp(command, "env", 3) == 0)
+{
 run_env(); }
 else if (strncmp(command, "setenv", 6) == 0)
 { }
@@ -36,5 +39,5 @@ else if (command[0] != '\0' && command[0] != '\n')
 {
 jnj_execute(command);
 } }
-return (0);
-}
+return (0); }
+
