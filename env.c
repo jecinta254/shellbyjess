@@ -12,7 +12,7 @@ int _our_env(our_info_t *info)
 }
 
 /**
- * getEnvironmentV - gets the value of a custom environment variable
+ * getEnvironments - gets the value of a custom environment variable
  * @info: Structure containing potential arguments. Used to maintain
  * @name: env var name
  *
