@@ -10,28 +10,28 @@
  */
 int our_is_chain(our_info_t *info, char *buf, size_t *p)
 {
-	size_t j = *p;
+	size_t x = *p;
 
-	if (buf[j] == '|' && buf[j + 1] == '|')
+	if (buf[x] == '|' && buf[x + 1] == '|')
 	{
-		buf[j] = 0;
-		j++;
+		buf[x] = 0;
+		x++;
 		info->our_cmd_buf_type = CMD_OR;
 	}
-	else if (buf[j] == '&' && buf[j + 1] == '&')
+	else if (buf[x] == '&' && buf[x + 1] == '&')
 	{
-		buf[j] = 0;
-		j++;
+		buf[x] = 0;
+		x++;
 		info->our_cmd_buf_type = CMD_AND;
 	}
-	else if (buf[j] == ';') /* found end of this command */
+	else if (buf[x] == ';') /* found end of this command */
 	{
-		buf[j] = 0; /* replace semicolon with null */
+		buf[x] = 0; /* replace semicolon with null */
 		info->our_cmd_buf_type = CMD_CHAIN;
 	}
 	else
 		return (0);
-	*p = j;
+	*p = x;
 	return (1);
 }
 
@@ -48,14 +48,14 @@ int our_is_chain(our_info_t *info, char *buf, size_t *p)
 void our_check_chain(our_info_t *info,
 char *buf, size_t *p, size_t i, size_t len)
 {
-	size_t j = *p;
+	size_t x = *p;
 
 	if (info->our_cmd_buf_type == CMD_AND)
 	{
 		if (info->status)
 		{
 			buf[i] = 0;
-			j = len;
+			x = len;
 		}
 	}
 	if (info->our_cmd_buf_type == CMD_OR)
@@ -63,11 +63,11 @@ char *buf, size_t *p, size_t i, size_t len)
 		if (!info->status)
 		{
 			buf[i] = 0;
-			j = len;
+			x = len;
 		}
 	}
 
-	*p = j;
+	*p = x;
 }
 
 /**

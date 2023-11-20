@@ -64,7 +64,7 @@ void our_free_info(our_info_t *info, int all)
 			our_free_list(&(info->our_alias));
 		our_ffree(info->environ);
 		info->environ = NULL;
-		free_pointer((void **)info->our_cmd_buf);
+		our_fpointer((void **)info->our_cmd_buf);
 		if (info->readFileDescriptor > 2)
 			close(info->readFileDescriptor);
 		our_putchar(OUR_BUF_FLUSH);

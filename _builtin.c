@@ -6,14 +6,14 @@
  * Return: exits with a given exit status
  * (0) if shellInfo.argv[0] != "exit"
  */
-int exitShell(our_info_t *info)
+int exit_Shell(our_info_t *info)
 {
-	int exitCheck;
+	int exiting;
 
 	if (info->our_argv[1]) /* If there is an exit argument */
 	{
-		exitCheck = _our_erratoi(info->our_argv[1]);
-		if (exitCheck == -1)
+		exiting = _our_erratoi(info->our_argv[1]);
+		if (exiting == -1)
 		{
 			info->status = 2;
 			our_print_error(info, "Bad number: ");
@@ -34,34 +34,34 @@ int exitShell(our_info_t *info)
  * constant function prototype.
  * Return: Always 0
  */
-int changeDirectory(our_info_t *info)
+int change_Directory(our_info_t *info)
 {
-	char *currentDir, *newDir, buffer[1024];
+	char *cDir, *nDir, buffer[1024];
 	int chdirReturn;
 
-	currentDir = getcwd(buffer, 1024);
-	if (!currentDir)
+	cDir = getcwd(buffer, 1024);
+	if (!cDir)
 		our_puts("TODO: >>getcwd on failure emsg<<\n");
 	if (!info->our_argv[1])
 	{
-		newDir = getEnvironmentV(info, "HOME=");
-		if (!newDir)
+		nDir = getEnvironments(info, "HOME=");
+		if (!nDir)
 			chdirReturn = /* TODO: what should this be? */
-				chdir((newDir = getEnvironmentV(info, "PWD=")) ? newDir : "/");
+				chdir((nDir = getEnvironments(info, "PWD=")) ? nDir : "/");
 		else
-			chdirReturn = chdir(newDir);
+			chdirReturn = chdir(nDir);
 	}
 	else if (our_strcmp(info->our_argv[1], "-") == 0)
 	{
-		if (!getEnvironmentV(info, "OLDPWD="))
+		if (!getEnvironments(info, "OLDPWD="))
 		{
-			our_puts(currentDir);
+			our_puts(cDir);
 			our_putchar('\n');
 			return (1);
 		}
-		our_puts(getEnvironmentV(info, "OLDPWD=")), our_putchar('\n');
+		our_puts(getEnvironments(info, "OLDPWD=")), our_putchar('\n');
 		chdirReturn = /* TODO: what should this be? */
-			chdir((newDir = getEnvironmentV(info, "OLDPWD=")) ? newDir : "/");
+			chdir((nDir = getEnvironments(info, "OLDPWD=")) ? nDir : "/");
 	}
 	else
 		chdirReturn = chdir(info->our_argv[1]);
@@ -72,7 +72,7 @@ int changeDirectory(our_info_t *info)
 	}
 	else
 	{
-		our_setenv(info, "OLDPWD", getEnvironmentV(info, "PWD="));
+		our_setenv(info, "OLDPWD", getEnvironments(info, "PWD="));
 		our_setenv(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
@@ -84,13 +84,13 @@ int changeDirectory(our_info_t *info)
  * constant function prototype.
  * Return: Always 0
  */
-int showHelp(our_info_t *info)
+int show_Help(our_info_t *info)
 {
-	char **argumentArray;
+	char **argArray;
 
-	argumentArray = info->our_argv;
+	argArray = info->our_argv;
 	our_puts("Help!! function is yet implemented \n");
 	if (0)
-		our_puts(*argumentArray);
+		our_puts(*argArray);
 	return (0);
 }

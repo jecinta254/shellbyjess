@@ -8,7 +8,7 @@ char *our_get_history_file(our_info_t *info)
 {
 	char *our_buf, *our_dir;
 
-	our_dir = getEnvironmentV(info, "HOME=");
+	our_dir = getEnvironments(info, "HOME=");
 	if (!our_dir)
 		return (NULL);
 	our_buf = malloc(sizeof(char) *
@@ -29,24 +29,24 @@ char *our_get_history_file(our_info_t *info)
  */
 int our_write_history(our_info_t *info)
 {
-	ssize_t fd;
+	ssize_t f;
 	char *filename = our_get_history_file(info);
 	our_list_t *node = NULL;
 
 	if (!filename)
 
 		return (-1);
-	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	f = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
-	if (fd == -1)
+	if (f == -1)
 		return (-1);
 	for (node = info->our_history; node; node = node->next)
 	{
-		_our_putsfd(node->str, fd);
-		_our_putfd('\n', fd);
+		_our_putsfd(node->str, f);
+		_our_putfd('\n', f);
 	}
-	_our_putfd(OUR_BUF_FLUSH, fd);
-	close(fd);
+	_our_putfd(OUR_BUF_FLUSH, f);
+	close(f);
 	return (1);
 }
 
@@ -57,40 +57,40 @@ int our_write_history(our_info_t *info)
  */
 int our_read_history(our_info_t *info)
 {
-	int i, last = 0, linecount = 0;
-	ssize_t fd, rdlen, fsize = 0;
+	int i, last = 0, count = 0;
+	ssize_t f, rlen, fsize = 0;
 	struct stat st;
 	char *buf = NULL, *filename = our_get_history_file(info);
 
 	if (!filename)
 		return (0);
-	fd = open(filename, O_RDONLY);
+	f = open(filename, O_RDONLY);
 	free(filename);
-	if (fd == -1)
+	if (f == -1)
 		return (0);
-	if (!fstat(fd, &st))
+	if (!fstat(f, &st))
 		fsize = st.st_size;
 	if (fsize < 2)
 		return (0);
 	buf = malloc(sizeof(char) * (fsize + 1));
 	if (!buf)
 		return (0);
-	rdlen = read(fd, buf, fsize);
+	rlen = read(f, buf, fsize);
 	buf[fsize] = 0;
-	if (rdlen <= 0)
+	if (rlen <= 0)
 		return (free(buf), 0);
-	close(fd);
+	close(f);
 	for (i = 0; i < fsize; i++)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
-			our_build_history_list(info, buf + last, linecount++);
+			our_build_history_list(info, buf + last, count++);
 			last = i + 1;
 		}
 	if (last != i)
-		our_build_history_list(info, buf + last, linecount++);
+		our_build_history_list(info, buf + last, count++);
 	free(buf);
-	info->our_histcount = linecount;
+	info->our_histcount = count;
 	while (info->our_histcount-- >= OUR_HIST_MAX)
 		our_delete_node_at_index(&(info->our_history), 0);
 	our_renumber_history(info);
@@ -101,17 +101,17 @@ int our_read_history(our_info_t *info)
  * our_build_history_list - adds entry to a history linked list
  * @info: Structure containing potential arguments. Used to maintain
  * @our_buf: buffer
- * @linecount: the history linecount, histcount
+ * @count: the history linecount, histcount
  * Return: Always 0
  */
 int our_build_history_list(our_info_t *info,
-char *our_buf, int linecount)
+char *our_buf, int count)
 {
 	our_list_t *node = NULL;
 
 	if (info->our_history)
 		node = info->our_history;
-	our_add_node_end(&node, our_buf, linecount);
+	our_add_node_end(&node, our_buf, count);
 	if (!info->our_history)
 		info->our_history = node;
 	return (0);

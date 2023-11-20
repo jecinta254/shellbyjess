@@ -164,7 +164,7 @@ void our_ffree(char **);
 void *our_realloc(void *, unsigned int, unsigned int);
 
 /* memory.c */
-int free_pointer(void **);
+int our_fpointer(void **);
 
 /* atoi.c */
 int ourInteractive(our_info_t *);
@@ -180,9 +180,9 @@ char *our_convert_number(long int, int, int);
 void our_remove_comments(char *);
 
 /* builtin.c */
-int exitShell(our_info_t *);
-int changeDirectory(our_info_t *);
-int showHelp(our_info_t *);
+int exit_Shell(our_info_t *);
+int change_Directory(our_info_t *);
+int show_Help(our_info_t *);
 
 /* builtin1.c */
 int _our_history(our_info_t *);
@@ -205,7 +205,7 @@ void our_free_info(our_info_t *, int);
 
 /* environment.c */
 int _our_env(our_info_t *);
-char *getEnvironmentV(our_info_t *, const char *);
+char *getEnvironments(our_info_t *, const char *);
 int _our_setenv(our_info_t *);
 int _our_unsetenv(our_info_t *);
 int populate_our_env_list(our_info_t *);

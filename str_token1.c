@@ -27,19 +27,19 @@ char *our_strcpy(char *dest, char *src)
  */
 char *our_strdup(const char *str)
 {
-	int length = 0;
-	char *ret;
+	int size = 0;
+	char *rt;
 
 	if (str == NULL)
 		return (NULL);
 	while (*str++)
-		length++;
-	ret = malloc(sizeof(char) * (length + 1));
-	if (!ret)
+		size++;
+	rt = malloc(sizeof(char) * (size + 1));
+	if (!rt)
 		return (NULL);
-	for (length++; length--;)
-		ret[length] = *--str;
-	return (ret);
+	for (size++; size--;)
+		rt[size] = *--str;
+	return (rt);
 }
 
 /**

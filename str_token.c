@@ -63,12 +63,12 @@ char *our_starts_with(const char *haystack, const char *needle)
  */
 char *our_strcat(char *dest, char *src)
 {
-	char *ret = dest;
+	char *rt = dest;
 
 	while (*dest)
 		dest++;
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (ret);
+	return (rt);
 }

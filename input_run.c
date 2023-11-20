@@ -56,13 +56,13 @@ int our_find_builtin(our_info_t *info)
 {
 	int i, our_built_in_ret = -1;
 	our_builtin_table our_builtintbl[] = {
-		{"exit", exitShell},
+		{"exit", exit_Shell},
 		{"env", _our_env},
-		{"help", showHelp},
+		{"help", show_Help},
 		{"history",  _our_history},
 		{"setenv", _our_setenv},
 		{"unsetenv", _our_unsetenv},
-		{"cd", changeDirectory},
+		{"cd", change_Directory},
 		{"alias",  _our_alias},
 		{NULL, NULL}
 	};
@@ -101,7 +101,7 @@ void our_find_cmd(our_info_t *info)
 		return;
 
 	path = our_find_path(info,
-	getEnvironmentV(info, "PATH="), info->our_argv[0]);
+	getEnvironments(info, "PATH="), info->our_argv[0]);
 	if (path)
 	{
 		info->our_path = path;
@@ -110,7 +110,7 @@ void our_find_cmd(our_info_t *info)
 	else
 	{
 		if ((ourInteractive(info) ||
-		getEnvironmentV(info, "PATH=")
+		getEnvironments(info, "PATH=")
 			|| info->our_argv[0][0] == '/') &&
 			our_is_cmd(info, info->our_argv[0]))
 			our_fork_cmd(info);

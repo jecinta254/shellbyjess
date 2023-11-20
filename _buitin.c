@@ -33,43 +33,43 @@ int _our_exit(our_info_t *info)
  */
 int _our_cd(our_info_t *info)
 {
-	char *current_dir, *target_dir, buffer[1024];
-	int chdir_ret;
+	char *cdir, *tdir, buffer[1024];
+	int chdir_rt;
 
-	current_dir = getcwd(buffer, 1024);
-	if (!current_dir)
+	cdir = getcwd(buffer, 1024);
+	if (!cdir)
 		our_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->our_argv[1])
 	{
-		target_dir = getEnvironmentV(info, "HOME=");
-		if (!target_dir)
-			chdir_ret = /* TODO: what should this be? */
-				chdir((target_dir = getEnvironmentV(info, "PWD=")) ?
-				target_dir : "/");
+		tdir = getEnvironments(info, "HOME=");
+		if (!tdir)
+			chdir_rt = /* TODO: what should this be? */
+				chdir((tdir = getEnvironments(info, "PWD=")) ?
+				tdir : "/");
 		else
-			chdir_ret = chdir(target_dir);
+			chdir_rt = chdir(tdir);
 	}
 	else if (our_strcmp(info->our_argv[1], "-") == 0)
 	{
-		if (!getEnvironmentV(info, "OLDPWD="))
+		if (!getEnvironments(info, "OLDPWD="))
 		{
-			our_puts(current_dir), our_putchar('\n');
+			our_puts(cdir), our_putchar('\n');
 			return (1);
 		}
-		our_puts(getEnvironmentV(info, "OLDPWD=")), our_putchar('\n');
-		chdir_ret = /* TODO: what should this be? */
-			chdir((target_dir = getEnvironmentV(info, "OLDPWD=")) ? target_dir : "/");
+		our_puts(getEnvironments(info, "OLDPWD=")), our_putchar('\n');
+		chdir_rt = /* TODO: what should this be? */
+			chdir((tdir = getEnvironments(info, "OLDPWD=")) ? tdir : "/");
 	}
 	else
-		chdir_ret = chdir(info->our_argv[1]);
-	if (chdir_ret == -1)
+		chdir_rt = chdir(info->our_argv[1]);
+	if (chdir_rt == -1)
 	{
 		our_print_error(info, "cd not working ");
 		_our_eputs(info->our_argv[1]), _our_eputchar('\n');
 	}
 	else
 	{
-		our_setenv(info, "OLDPWD", getEnvironmentV(info, "PWD="));
+		our_setenv(info, "OLDPWD", getEnvironments(info, "PWD="));
 		our_setenv(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
@@ -81,11 +81,11 @@ int _our_cd(our_info_t *info)
  */
 int _our_help(our_info_t *info)
 {
-	char **arg_array;
+	char **argArray;
 
-	arg_array = info->our_argv;
+	argArray = info->our_argv;
 	our_puts("HELP!! function is yet implemented \n");
 	if (0)
-		our_puts(*arg_array); /* temp att_unused workaround */
+		our_puts(*argArray); /* temp att_unused workaround */
 	return (0);
 }

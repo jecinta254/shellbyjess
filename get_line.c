@@ -10,8 +10,8 @@
 ssize_t our_input_buf(our_info_t *info, char **our_buf,
 size_t *our_len)
 {
-	ssize_t r = 0;
-	size_t len_p = 0;
+	ssize_t q = 0;
+	size_t len_z = 0;
 
 	if (!*our_len) /* if nothing left in the buffer, fill it */
 	{
@@ -20,28 +20,28 @@ size_t *our_len)
 		*our_buf = NULL;
 		signal(SIGINT, our_sigintHandler);
 #if USE_GETLINE
-		r = getline(our_buf, &len_p, stdin);
+		q = getline(our_buf, &len_z, stdin);
 #else
-		r = our_getline(info, our_buf, &len_p);
+		q = our_getline(info, our_buf, &len_z);
 #endif
-		if (r > 0)
+		if (q > 0)
 		{
-			if ((*our_buf)[r - 1] == '\n')
+			if ((*our_buf)[q - 1] == '\n')
 			{
-				(*our_buf)[r - 1] = '\0'; /* remove trailing newline */
-				r--;
+				(*our_buf)[q - 1] = '\0'; /* remove trailing newline */
+				q--;
 			}
 			info->our_linecount_flag = 1;
 			our_remove_comments(*our_buf);
 			our_build_history_list(info, *our_buf, info->our_histcount++);
 			/* if (_strchr(*our_buf, ';')) is this a command chain? */
 			{
-				*our_len = r;
+				*our_len = q;
 				info->our_cmd_buf = our_buf;
 			}
 		}
 	}
-	return (r);
+	return (q);
 }
 
 /**
@@ -53,17 +53,17 @@ ssize_t our_get_input(our_info_t *info)
 {
 	static char *our_buf; /* the ';' command chain buffer */
 	static size_t i, j, len;
-	ssize_t r = 0;
-	char **buf_p = &(info->our_arg), *p;
+	ssize_t q = 0;
+	char **buf_z = &(info->our_arg), *z;
 
 	our_putchar(OUR_BUF_FLUSH);
-	r = our_input_buf(info, &our_buf, &len);
-	if (r == -1) /* EOF */
+	q = our_input_buf(info, &our_buf, &len);
+	if (q == -1) /* EOF */
 		return (-1);
 	if (len)
 	{
 		j = i;
-		p = our_buf + i;
+		z = our_buf + i;
 		our_check_chain(info, our_buf, &j, i, len);
 		while (j < len) /* iterate to semicolon or end */
 		{
@@ -78,12 +78,12 @@ ssize_t our_get_input(our_info_t *info)
 			i = len = 0; /* reset position and length */
 			info->our_cmd_buf_type = CMD_NORM;
 		}
-		*buf_p = p; /* pass back pointer to current command position */
-		return (our_strlen(p)); /* return length of current command */
+		*buf_z = z; /* pass back pointer to current command position */
+		return (our_strlen(z)); /* return length of current command */
 	}
 
-	*buf_p = our_buf;
-	return (r); /* return length of buffer from our_getline() */
+	*buf_z = our_buf;
+	return (q); /* return length of buffer from our_getline() */
 }
 
 /**
@@ -92,18 +92,18 @@ ssize_t our_get_input(our_info_t *info)
  * @our_buf: buffer
  * @i: size
  *
- * Return: r
+ * Return: q
  */
 ssize_t our_read_buf(our_info_t *info, char *our_buf, size_t *i)
 {
-	ssize_t r = 0;
+	ssize_t q = 0;
 
 	if (*i)
 		return (0);
-	r = read(info->readFileDescriptor, our_buf, READ_BUF_SIZE);
-	if (r >= 0)
-		*i = r;
-	return (r);
+	q = read(info->readFileDescriptor, our_buf, READ_BUF_SIZE);
+	if (q >= 0)
+		*i = q;
+	return (q);
 }
 
 /**
@@ -117,35 +117,35 @@ ssize_t our_read_buf(our_info_t *info, char *our_buf, size_t *i)
 int our_getline(our_info_t *info, char **ptr, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
-	static size_t i, len;
+	static size_t i, l;
 	size_t k;
-	ssize_t r = 0, s = 0;
-	char *p = NULL, *new_p = NULL, *c;
+	ssize_t q = 0, s = 0;
+	char *z = NULL, *new_z = NULL, *c;
 
-	p = *ptr;
-	if (p && length)
+	z = *ptr;
+	if (z && length)
 		s = *length;
-	if (i == len)
-		i = len = 0;
+	if (i == l)
+		i = l = 0;
 
-	r = our_read_buf(info, buf, &len);
-	if (r == -1 || (r == 0 && len == 0))
+	q = our_read_buf(info, buf, &l);
+	if (q == -1 || (q == 0 && l == 0))
 		return (-1);
 	c = _our_strchr(buf + i, '\n');
-	k = c ? 1 + (unsigned int)(c - buf) : len;
-	new_p = our_realloc(p, s, s ? s + k : k + 1);
-	if (!new_p) /* MALLOC FAILURE! */
-		return (p ? free(p), -1 : -1);
+	k = c ? 1 + (unsigned int)(c - buf) : l;
+	new_z = our_realloc(z, s, s ? s + k : k + 1);
+	if (!new_z) /* MALLOC FAILURE! */
+		return (z ? free(z), -1 : -1);
 	if (s)
-		_our_strncat(new_p, buf + i, k - i);
+		_our_strncat(new_z, buf + i, k - i);
 	else
-		_our_strncpy(new_p, buf + i, k - i + 1);
+		_our_strncpy(new_z, buf + i, k - i + 1);
 	s += k - i;
 	i = k;
-	p = new_p;
+	z = new_z;
 	if (length)
 		*length = s;
-	*ptr = p;
+	*ptr = z;
 	return (s);
 }
 

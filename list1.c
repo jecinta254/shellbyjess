@@ -6,14 +6,14 @@
  */
 size_t our_list_len(const our_list_t *current_node)
 {
-	size_t count = 0;
+	size_t counts = 0;
 
 	while (current_node)
 	{
 		current_node = current_node->next;
-		count++;
+		counts++;
 	}
-	return (count);
+	return (counts);
 }
 
 /**
@@ -26,7 +26,7 @@ char **our_list_to_strings(our_list_t *head)
 {
 	our_list_t *current_node = head;
 	size_t size = our_list_len(head), index;
-	char **strings_array;
+	char **string_array;
 	char *str;
 
 	size_t j;
@@ -34,8 +34,8 @@ char **our_list_to_strings(our_list_t *head)
 	if (!head || !size)
 		return (NULL);
 
-	strings_array = malloc(sizeof(char *) * (size + 1));
-	if (!strings_array)
+	string_array = malloc(sizeof(char *) * (size + 1));
+	if (!string_array)
 		return (NULL);
 
 	for (index = 0; current_node; current_node = current_node->next, index++)
@@ -44,17 +44,17 @@ char **our_list_to_strings(our_list_t *head)
 		if (!str)
 		{
 			for (j = 0; j < index; j++)
-				free(strings_array[j]);
-			free(strings_array);
+				free(string_array[j]);
+			free(string_array);
 			return (NULL);
 		}
 
 		str = our_strcpy(str, current_node->str);
-		strings_array[index] = str;
+		string_array[index] = str;
 	}
 
-	strings_array[index] = NULL;
-	return (strings_array);
+	string_array[index] = NULL;
+	return (string_array);
 }
 
 
@@ -66,7 +66,7 @@ char **our_list_to_strings(our_list_t *head)
  */
 size_t our_print_list(const our_list_t *current_node)
 {
-	size_t count = 0;
+	size_t counts = 0;
 
 	while (current_node)
 	{
@@ -76,9 +76,9 @@ size_t our_print_list(const our_list_t *current_node)
 		our_puts(current_node->str ? current_node->str : "(nil)");
 		our_puts("\n");
 		current_node = current_node->next;
-		count++;
+		counts++;
 	}
-	return (count);
+	return (counts);
 }
 
 /**
