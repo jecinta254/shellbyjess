@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * exitShell - exits the shell
+ * exit_Shell - exits the shell
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
  * Return: exits with a given exit status
@@ -29,7 +29,7 @@ int exit_Shell(our_info_t *info)
 }
 
 /**
- * changeDirectory - changes the current directory of the process
+ * change_Directory - changes the current directory of the process
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
  * Return: Always 0
@@ -79,7 +79,7 @@ int change_Directory(our_info_t *info)
 }
 
 /**
- * showHelp - displays help information
+ * show_Help - displays help information
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
  * Return: Always 0

@@ -40,8 +40,8 @@ int ourAlpha(int character)
 }
 
 /**
- * stringToInteger - converts a string to an integer
- * @inputString: the string to be converted
+ * stringandInteger - converts a string to an integer
+ * @ourString: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  */
 int stringandInteger(char *ourString)

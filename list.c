@@ -134,13 +134,14 @@ int our_delete_node_at_index(our_list_t **our_head, unsigned int our_index)
 
 /**
  * our_free_list - frees all nodes of a list
- * @custom_head_ptr: address of pointer to head node
+ * @our_head_ptr: address of pointer to head node
  *
  * Return: void
  */
 void our_free_list(our_list_t **our_head_ptr)
 {
 	our_list_t *our_node, *our_next_node, *our_head;
+
 	if (!our_head_ptr || !*our_head_ptr)
 		return;
 	our_head = *our_head_ptr;
