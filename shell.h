@@ -1,5 +1,5 @@
-#ifndef MAIN_SHELL_HEADER_FILE
-#define MAIN_SHELL_HEADER_FILE
+#ifndef BAHARI_HEADER_FILE
+#define BAHARI_HEADER_FILE
 
 #include <stdio.h>
 #include <stdlib.h>
