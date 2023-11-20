@@ -8,7 +8,8 @@
  *
  * Return: size of list
  */
-our_list_t *our_add_node(our_list_t **our_head, const char *our_str, int our_num)
+our_list_t *our_add_node(our_list_t **our_head,
+const char *our_str, int our_num)
 {
 	our_list_t *new_our_head;
 
@@ -41,7 +42,8 @@ our_list_t *our_add_node(our_list_t **our_head, const char *our_str, int our_num
  *
  * Return: size of list
  */
-our_list_t *our_add_node_end(our_list_t **our_head, const char *our_str, int our_num)
+our_list_t *our_add_node_end(our_list_t **our_head,
+const char *our_str, int our_num)
 {
 	our_list_t *new_our_node, *our_node;
 

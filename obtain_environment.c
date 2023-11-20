@@ -16,7 +16,7 @@ char **our_get_environ(our_info_t *info)
 }
 
 /**
- * custom_unsetenv - Remove our environment variable
+ * our_unsetenv - Remove our environment variable
  * @info: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
  * Return: 1 on delete, 0 otherwise

@@ -2,8 +2,8 @@
 /**
  * our_input_buf - buffers chained commands
  * @info: parameter struct
- * @custom_buf: address of buffer
- * @custom_len: address of len var
+ * @our_buf: address of buffer
+ * @our_len: address of len var
  *
  * Return: bytes read
  */
